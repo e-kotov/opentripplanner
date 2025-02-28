@@ -53,17 +53,22 @@ otp_isochrone <- function(otpcon = NA,
                           timezone = otpcon$timezone) {
   # Check for OTP2
   if (!is.null(otpcon$otp_version)) {
-    if (otpcon$otp_version >= 2.0 & otpcon$otp_version <= 2.1) {
-      stop("Isochrones are not supported by OTP v2.0-2.1. Consider using v1.5 or v2.2+.")
-    } else if (otpcon$otp_version >= 2.2) {
-      message("OTP v2.2+ experimentaly supports isochrones, see https://docs.opentripplanner.org/en/v2.4.0/sandbox/TravelTime/")
+    if (otpcon$otp_version >= 2.2 & otpcon$otp_version <= 2.5) {
+      message(
+        "OTP v2.2 to v2.5 support isochrones experimentally, see https://docs.opentripplanner.org/en/v2.5.0/sandbox/TravelTime/ . Starting with OTP 2.6 the support for isochrones has been removed."
+      )
+    } else {
+      stop(sprintf(
+        "Isochrones are not supported by OTP v%s. Please use OTP v2.2 to v2.5.",
+        otpcon$otp_version
+      ))
     }
   }
 
   # Warn about walking isochrones not being supported by OTP v2
   if (otpcon$otp_version >= 2.0) {
     if (length(mode) == 1 && mode == "WALK") {
-      warning("Walking-only isochrones are not supported by OTP v2. You can only use \"WALK,TRANSIT\". When set to \"WALK\" OTPv2 defaults to  \"WALK,TRANSIT\". See https://docs.opentripplanner.org/en/v2.4.0/sandbox/TravelTime/")
+      warning("Walking-only isochrones are not supported by OTP v2. You can only use \"WALK,TRANSIT\". When set to \"WALK\" OTPv2 defaults to  \"WALK,TRANSIT\". See https://docs.opentripplanner.org/en/v2.5.0/sandbox/TravelTime/")
     }
   }
 
