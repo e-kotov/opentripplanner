@@ -577,24 +577,27 @@ otp_check_java <- function(otp_version = 1.5) {
     }
 
     if (otp_version >= 2.2) {
-      if (java_version >= 1.8 & java_version < 1.9) {
-        warning("You have OTP 2.2+ but the version of Java for OTP 1.x")
-        return(FALSE)
+      if (otp_version < 2.5) {
+        # OTP 2.2 to 2.4 require Java 17 or later.
+        if (java_version < 17) {
+          warning("OTP 2.2 to 2.4 require Java version 17 or later; you have version ", java_version)
+          return(FALSE)
+        } else {
+          message("You have the correct version of Java for OTP ", otp_version, " (requires Java 17 or later)")
+          return(TRUE)
+        }
+      } else {
+        # OTP 2.5 or later require Java 21 or later.
+        if (java_version < 21) {
+          warning("OTP 2.5+ require Java version 21 or later; you have version ", java_version)
+          return(FALSE)
+        } else {
+          message("You have the correct version of Java for OTP ", otp_version, " (requires Java 21 or later)")
+          return(TRUE)
+        }
       }
-
-      if (java_version == 11) {
-        warning("You have OTP 2.2+ but the version of Java for OTP 2.0 or 2.1")
-        return(FALSE)
-      }
-
-      if (java_version == 17) {
-        message("You have the correct version of Java for OTP 2.2+")
-        return(TRUE)
-      }
-
-      warning("OTP 2.2+ requires Java version 17 you have version ", java_version)
-      return(FALSE)
     }
+    
 
     warning("OTP requires Java version 1.8 you have version ", java_version)
     return(FALSE)
