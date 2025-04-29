@@ -52,7 +52,7 @@ otp_isochrone <- function(otpcon = NA,
                           ncores = max(round(parallel::detectCores() * 1.25) - 1,1),
                           timezone = otpcon$timezone) {
   # Check for OTP2
-  if (!is.null(otpcon$otp_version)) {
+  if (!is.null(otpcon$otp_version) && otpcon$otp_version >= 2.0) {
     if (otpcon$otp_version >= 2.2 & otpcon$otp_version <= 2.5) {
       message(
         "OTP v2.2 to v2.5 support isochrones experimentally, see https://docs.opentripplanner.org/en/v2.5.0/sandbox/TravelTime/ . Starting with OTP 2.6 the support for isochrones has been removed."
