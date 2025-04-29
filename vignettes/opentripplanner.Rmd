@@ -38,6 +38,20 @@ remotes::install_github("ropensci/opentripplanner") # Install Package
 library(opentripplanner)                            # Load Package
 ```
 
+Check if you have the correct Java version installed:
+
+```{r check_java, eval=FALSE}
+otp_check_java()
+```
+
+If you do not have the correct Java version, you can install it and immidiately use in the current R session with:
+
+```{r install_java, eval=FALSE}
+install.packages("rJavaEnv")
+library(rJavaEnv)
+use_java(8)
+```
+
 ## Downloading OTP and the demonstration data
 
 We will build an example graph for the Isle of Wight using some example data provided for the package. A graph is what OTP uses to find routes, and must be built out of the raw data provided. Please note the demo data has been modified for teaching purposes and should not be used for analysis.

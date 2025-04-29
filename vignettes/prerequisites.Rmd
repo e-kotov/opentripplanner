@@ -92,8 +92,9 @@ The OpenTripPlanner for R package requires:
 Different versions of OTP require different version of Java
 
 * OTP v1.5 - Java 8 - **Recommended for beginners**
-* OTP v2.0 & v2.1 - Java 11
-* OTP v2.2 - Java 17
+* OTP 2.0 & 2.1  - Java 11
+* OTP 2.2–2.4  - Java 17
+* OTP 2.5–2.6+  - Java 21
 
 Use of OTP v1.5 is the default for this package and recommended for beginners and it is stable and full featured. Future updates of the package will add more support for OTP v2.2+.
 
@@ -112,6 +113,27 @@ For Debian based Linux including Ubuntu and Linux Mint, the following commands i
 ```{eval = FALSE}
 sudo apt install openjdk-8-jdk
 ```
+
+##### Quick Java installation
+
+You can also install Java programmatically from R using [`{rJavaEnv}`](https://cran.r-project.org/package=rJavaEnv) package.
+
+For example, install and use Java 8 for use with OTP 1.5 in the current R session:
+
+```{r, eval = FALSE}
+install.packages("rJavaEnv")
+library(rJavaEnv)
+use_java(8) 
+```
+
+Alternatively, install permanently for the current project directory Java 21 for use with OTP 2.5+:
+
+```{r, eval = FALSE}
+install.packages("rJavaEnv")
+library(rJavaEnv)
+java_quick_install(21)
+```
+
 
 ## Next Steps
 

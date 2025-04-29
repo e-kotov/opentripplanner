@@ -34,7 +34,8 @@ Different versions of OpenTripPlanner require different version of Java
 
 * OTP 1.x  - Java 8
 * OTP 2.0 & 2.1  - Java 11
-* OTP 2.2 - Java 17
+* OTP 2.2–2.4  - Java 17
+* OTP 2.5–2.6+  - Java 21
 
 It is possible to install multiple version of Java on the same computer:
 
@@ -43,12 +44,35 @@ It is possible to install multiple version of Java on the same computer:
 * [Java 8](https://www.java.com/en/download/)
 * [Java 11](https://www.oracle.com/uk/java/technologies/javase/jdk11-archive-downloads.html)
 * [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+* [Java 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+
 
 If you have multiple version of Java installed you will also need to change the PATH variable to point to the correct version of Java. You can check your current default version of Java in the terminal using
 
 ```{bash, eval = FALSE}
 java -version
 ```
+
+### Quick Java installation
+
+You can also install Java programmatically from R using [`{rJavaEnv}`](https://cran.r-project.org/package=rJavaEnv) package.
+
+For example, install and use Java 8 for use with OTP 1.5 in the current R session:
+
+```{r, eval = FALSE}
+install.packages("rJavaEnv")
+library(rJavaEnv)
+use_java(8) 
+```
+
+Alternatively, install permanently for the current project directory Java 21 for use with OTP 2.5+:
+
+```{r, eval = FALSE}
+install.packages("rJavaEnv")
+library(rJavaEnv)
+java_quick_install(21)
+```
+
 
 
 ## Checking your Java version
@@ -83,6 +107,3 @@ log2 <- otp_setup(otp = path_otp, dir = path_data)
 otpcon <- otp_connect(timezone = "Europe/London")
 ```
 We can download the demo data and build a graph in the usual way.
-
-
-
